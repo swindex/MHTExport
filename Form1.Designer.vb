@@ -30,8 +30,8 @@ Partial Class Form1
         Me.SaveAsMHTToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.OpenURLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.PLUGINS_Panel.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -81,36 +81,36 @@ Partial Class Form1
         'OpenToolStripMenuItem
         '
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
         Me.OpenToolStripMenuItem.Text = "Open..."
         '
         'SaveAsMHTToolStripMenuItem
         '
         Me.SaveAsMHTToolStripMenuItem.Name = "SaveAsMHTToolStripMenuItem"
-        Me.SaveAsMHTToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SaveAsMHTToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
         Me.SaveAsMHTToolStripMenuItem.Text = "Save As MHT"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
         Me.AboutToolStripMenuItem.Text = "About"
-        '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
         'OpenURLToolStripMenuItem
         '
         Me.OpenURLToolStripMenuItem.Name = "OpenURLToolStripMenuItem"
-        Me.OpenURLToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenURLToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
         Me.OpenURLToolStripMenuItem.Text = "Open URL..."
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
         'Form1
         '
