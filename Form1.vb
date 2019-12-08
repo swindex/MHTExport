@@ -40,9 +40,11 @@ Public Class Form1
 
     Private Sub SaveAsMHTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveAsMHTToolStripMenuItem.Click
         Dim d As New SaveFileDialog
-        d.DefaultExt = "*.html"
+        d.DefaultExt = "*.mht"
         d.SupportMultiDottedExtensions = True
-        d.Filter = "WEB Archive|*.html"
+        d.Filter = "WEB Archive|*.mht"
+        d.FileName = WebBrowser1.DocumentTitle
+        d.AddExtension = True
         d.ShowDialog()
         If d.FileName <> "" Then
             Dim fname As String = d.FileName 'System.IO.Path.GetFileNameWithoutExtension(d.FileName)
@@ -387,12 +389,16 @@ Public Class Get_Book_Page_Class
             If res_name <> "" Then doc = Replace(doc, match.Groups(1).Value, res_name.Replace(" ", "%20"))
         Next
 
-        Dim savef As New StreamWriter(Dirn(SavePath_) & "\" & FileNameExt(SavePath_))
-        savef.WriteLine(doc)
-        savef.Flush()
-        savef.Close()
+        ''Dim savef As New StreamWriter(Dirn(SavePath_) & "\" & FileName(SavePath_) & ".html")
+        'savef.WriteLine(doc)
+        'savef.Flush()
+        'savef.Close()
 
         writeMHT(doc)
+
+        If Directory.Exists(Dirn(SavePath_) & "\" & FileName(SavePath_)) Then
+            Directory.Delete(Dirn(SavePath_) & "\" & FileName(SavePath_), True)
+        End If
 
         complete = True
 
