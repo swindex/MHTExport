@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("WindowsApplication1")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("TEAM OS")> 
-<Assembly: AssemblyProduct("WindowsApplication1")> 
-<Assembly: AssemblyCopyright("Copyright © TEAM OS 2016")> 
+<Assembly: AssemblyTitle("MHTExport")>
+<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyCompany("Eldar Gerfanov")>
+<Assembly: AssemblyProduct("MHTExport")>
+<Assembly: AssemblyCopyright("Copyright © Eldar Gerfanov")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("9bdf0fb2-39c5-4993-8253-80fb3f8998fa")> 
+<Assembly: Guid("9bdf0fb2-39c5-4993-8253-80fb3f8998fa")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.0.0")> 
+<Assembly: AssemblyVersion("1.0.*")>
 <Assembly: AssemblyFileVersion("1.0.0.0")> 
