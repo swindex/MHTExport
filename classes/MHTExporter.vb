@@ -1,96 +1,8 @@
-﻿Imports Microsoft.Win32
-Imports System.Text
-Imports System.Security.Cryptography
-Imports System.IO
-Imports System.Threading
+﻿Imports System.IO
 Imports System.Text.RegularExpressions
+Imports System.Threading
 
-Imports System.Xml
-Imports System.Web
-Imports System.Data
-Imports System.Globalization
-Imports System.Runtime.InteropServices
-Imports System.Drawing.Drawing2D
-Imports System.Drawing
-Public Class Form1
-
-    Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
-        Dim d As New OpenFileDialog
-        d.DefaultExt = "*.html"
-        d.SupportMultiDottedExtensions = True
-        d.Filter = "*.htm|*.html"
-        d.ShowDialog()
-        If d.FileName <> "" Then
-            WebBrowser1.Navigate(d.FileName)
-
-        End If
-    End Sub
-
-    Private Sub OpenFileDialog1_FileOk(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
-
-    End Sub
-
-    Private Sub OpenURLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenURLToolStripMenuItem.Click
-        Dim ret As String = InputBox("Enter URL you want to oopen", "Load web Page")
-        If ret <> "" Then
-            WebBrowser1.Navigate(ret)
-
-        End If
-    End Sub
-
-    Private Sub SaveAsMHTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveAsMHTToolStripMenuItem.Click
-        Dim d As New SaveFileDialog
-        d.DefaultExt = "*.mht"
-        d.SupportMultiDottedExtensions = True
-        d.Filter = "WEB Archive|*.mht"
-        d.FileName = WebBrowser1.DocumentTitle
-        d.AddExtension = True
-        d.ShowDialog()
-        If d.FileName <> "" Then
-            Dim fname As String = d.FileName 'System.IO.Path.GetFileNameWithoutExtension(d.FileName)
-            If fname <> "" Then
-                Try
-                    Dim url As String = WebBrowser1.Url.ToString()
-
-                    Dim t = New Get_Book_Page_Class(url, fname)
-                    t.CallBack(AddressOf get_books_completed, "")
-
-                    File.WriteAllText(fname, "<html><title>" & fname & "</title><body><h1>Please Wait. Plugin Being Loaded ...<h1></body></html>")
-
-                    t.start()
-
-
-
-                    ''WebBrowser1.Navigate(fname)
-
-                    'SavePage(plugin_Tabs.SelectedTab.Tag, apppath & "plugins\" & fname & ".mht", fname)
-                Catch ex As Exception
-                    'MsgBox(Lang("DLG_Text34") & vbCrLf & ex.Message, MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, Lang("DLG_Title34"))
-                End Try
-                'Pop_Plugin_Tabs()
-            Else
-                ' MsgBox(Lang("DLG_Text35"), MsgBoxStyle.Critical + MsgBoxStyle.OkOnly, Lang("DLG_Title35"))
-
-            End If
-
-        End If
-
-
-    End Sub
-    Private Sub get_books_completed(ByVal url As String) ' Handles DL_PAge_.Finished
-        Try
-            WebBrowser1.Navigate(url)
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-End Class
-#Region "Get_Book_Page_Class"
-Public Class Get_Book_Page_Class
+Public Class MHTExporter
     Private func_ As ThreadStart
     Private calback_ As ThreadStart
 
@@ -109,8 +21,8 @@ Public Class Get_Book_Page_Class
     Dim strings As String
     Dim streams As String
 
-    Dim fakeRootPath As String = "file:///C:/Plugins/"
-    Dim fakeAssetPath As String = "file:///C:/Plugins/assets/"
+    Dim fakeRootPath As String = "file:///C:/website/"
+    Dim fakeAssetPath As String = "file:///C:/website/assets/"
 
     Public Event Finished(ByVal url As String)
 
@@ -235,14 +147,14 @@ Public Class Get_Book_Page_Class
 
     End Function
     Public Function ConvertTextToQuoted(ByVal sb As String) As String
-       
+
         sb = Replace(sb, "=", "=3D")
         Return LineWrap3(sb)
 
     End Function
     Public Function ConvertFileToQuoted(ByVal fileName As String) As String
         Dim sb As String = System.IO.File.ReadAllText(fileName)
-       
+
         sb = ConvertTextToQuoted(sb)
         Return LineWrap3(sb)
 
@@ -250,14 +162,14 @@ Public Class Get_Book_Page_Class
     Function ConvertTextToStream(text As String, streamname As String) As String
         Dim s As String = ""
         Dim encoding As String = ""
-        s = _
-        "Content-Type: " & GetMime(streamname, encoding) & vbCrLf & _
-        "Content-Transfer-Encoding: " & encoding & vbCrLf & _
-        "Content-Location: " & streamname & vbCrLf & _
+        s =
+        "Content-Type: " & GetMime(streamname, encoding) & vbCrLf &
+        "Content-Transfer-Encoding: " & encoding & vbCrLf &
+        "Content-Location: " & streamname & vbCrLf &
         vbCrLf & "=EF=BB=BF"
 
         If encoding = "quoted-printable" Then s &= ConvertTextToQuoted(text)
-        s &= vbCrLf & _
+        s &= vbCrLf &
         "------=_NextPart_000_0000_01D02214.354132E0"
         Return s
 
@@ -265,13 +177,13 @@ Public Class Get_Book_Page_Class
     Function AddFileToStream(filename As String, streamname As String) As String
         Dim s As String = ""
         Dim encoding As String = ""
-        s = "" & vbCrLf & _
-        "Content-Type: " & GetMime(filename, encoding) & vbCrLf & _
-        "Content-Transfer-Encoding: " & encoding & vbCrLf & _
+        s = "" & vbCrLf &
+        "Content-Type: " & GetMime(filename, encoding) & vbCrLf &
+        "Content-Transfer-Encoding: " & encoding & vbCrLf &
         "Content-Location: " & streamname & vbCrLf & vbCrLf
         If encoding = "base64" Then s &= ConvertFileToBase64(filename)
         If encoding = "quoted-printable" Then s &= ConvertFileToQuoted(filename)
-        s &= vbCrLf & _
+        s &= vbCrLf &
         "------=_NextPart_000_0000_01D02214.354132E0"
         ''Return s
         If encoding = "base64" Then streams &= s
@@ -408,18 +320,18 @@ Public Class Get_Book_Page_Class
     Sub writeMHT(body As String)
         Dim savef As New StreamWriter(Dirn(SavePath_) & "\" & FileName(SavePath_) & ".mht")
         Dim doc As String = ""
-        doc &= _
-        "From: <Сохранено Microsoft Internet Explorer 5>" & vbCrLf & _
-        "Subject: Title" & vbCrLf & _
-        "Date: Thu, 7 Aug 2014 00:48:31 -0500" & vbCrLf & _
-        "MIME-Version: 1.0" & vbCrLf & _
-        "Content-Type: multipart/related;" & vbCrLf & _
-        vbTab & "type=""text/html"";" & vbCrLf & _
-        vbTab & "boundary=""----=_NextPart_000_0000_01D02214.354132E0""" & vbCrLf & _
-        "X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5512" & vbCrLf & _
-        "" & vbCrLf & _
-        "This is a multi-part message in MIME format." & vbCrLf & _
-        "" & vbCrLf & _
+        doc &=
+        "From: <Saved from Microsoft Internet Explorer 5>" & vbCrLf &
+        "Subject: Title" & vbCrLf &
+        "Date: Thu, 7 Aug 2014 00:48:31 -0500" & vbCrLf &
+        "MIME-Version: 1.0" & vbCrLf &
+        "Content-Type: multipart/related;" & vbCrLf &
+        vbTab & "type=""text/html"";" & vbCrLf &
+        vbTab & "boundary=""----=_NextPart_000_0000_01D02214.354132E0""" & vbCrLf &
+        "X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5512" & vbCrLf &
+        "" & vbCrLf &
+        "This is a multi-part message in MIME format." & vbCrLf &
+        "" & vbCrLf &
         "------=_NextPart_000_0000_01D02214.354132E0" & vbCrLf
 
         doc &= ConvertTextToStream(body, fakeRootPath & "index.html")
@@ -509,4 +421,3 @@ Public Class Get_Book_Page_Class
         AddFileToStream(file_, fakeAssetPath & FileNameExt(file_).Replace(" ", "%20"))
     End Sub
 End Class
-#End Region

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class MainForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -81,38 +81,38 @@ Partial Class Form1
         'OpenToolStripMenuItem
         '
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.OpenToolStripMenuItem.Text = "Open..."
         '
         'SaveAsMHTToolStripMenuItem
         '
         Me.SaveAsMHTToolStripMenuItem.Name = "SaveAsMHTToolStripMenuItem"
-        Me.SaveAsMHTToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.SaveAsMHTToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.SaveAsMHTToolStripMenuItem.Text = "Save As MHT"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.AboutToolStripMenuItem.Text = "About"
         '
         'OpenURLToolStripMenuItem
         '
         Me.OpenURLToolStripMenuItem.Name = "OpenURLToolStripMenuItem"
-        Me.OpenURLToolStripMenuItem.Size = New System.Drawing.Size(144, 22)
+        Me.OpenURLToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.OpenURLToolStripMenuItem.Text = "Open URL..."
         '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Form1
+        'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -120,8 +120,8 @@ Partial Class Form1
         Me.Controls.Add(Me.PLUGINS_Panel)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
-        Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Name = "MainForm"
+        Me.Text = "MHTExport by Eldar Gerfanov"
         Me.PLUGINS_Panel.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
